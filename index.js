@@ -24,7 +24,7 @@ server.put("/users/:nome", userController)
 server.post("/users/new", userController)
 server.delete("/users/:email", userController)
 server.use("/tasks", tasksController) 
-
+server.get("/tasks/user/:userId", tasksController);
 
 mongoose.connect(DATABASE_URL)
 .then( () => {

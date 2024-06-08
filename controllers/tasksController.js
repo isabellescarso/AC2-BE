@@ -7,20 +7,32 @@ const jwt = require('jsonwebtoken')
 const bcrypt= require('bcryptjs')
 
 //rota para criar uma tarefa - funcionando! 
-tasksController.post("/new", async (req, res) => {
-
+tasksController.post("/new", auth, async (req, res) => {
     const { tarefa, stts, objetivo } = req.body
     try {
-
+        const user = await UserModel.findById(req.user.id); 
         const newTask = await TaskModel.create({
             tarefa: tarefa,
             stts: stts,
             objetivo: objetivo,
+            userId: user._id // Associa a tarefa ao usuário autenticado
         })
 
         return res.status(201).json(newTask)
     } catch (err) {
         return res.status(500).json({ error: "Erro ao criar tarefa, tente novamente!" })
+    }
+})
+
+//rota para listar as tarefas do usuario
+tasksController.get("/user/:userId", auth, async (req, res) => {
+    const userId = req.params.userId;
+    try {
+        const tasks = await TaskModel.find({ userId: userId });
+        return res.status(200).json(tasks);
+    } catch (err) {
+        console.error("Erro ao listar tarefas do usuário:", err);
+        return res.status(500).json({ error: "Erro ao listar tarefas do usuário!" });
     }
 })
 

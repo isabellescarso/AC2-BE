@@ -77,7 +77,6 @@ userController.get("/", auth, async (req, res) => {
 })
 
 
-///não está localizando o usuário para deletar
 userController.delete("/:email", auth, async (req, res) => {
     const email = req.params.email;
     try {
@@ -90,10 +89,6 @@ userController.delete("/:email", auth, async (req, res) => {
         return res.status(500).json({ mensagem: "Erro ao excluir usuário!" });
     }
 });
-
-//verificar o pq o token jwt n está funcionando e acertar o login também 
-//acertar o cadastro de cliente/usuário com as funções
-// perguntar se a página de TODO deve ter um novo controller dar use.todo controller
 
 
 module.exports = userController
