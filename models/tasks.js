@@ -6,7 +6,8 @@ const TaskSchema = new mongoose.Schema({
     objetivo: String,
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'users',
+        default: null
     }
 })
 

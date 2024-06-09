@@ -63,7 +63,7 @@ userController.put("/update/:email", auth, async (req, res) => {
     }
 })
 
-// Rota para listar todos os usuários cadastrados, sem autenticação JWT
+// Rota para listar todos os usuários cadastrados
 userController.get("/", auth, async (req, res) => {
     try {
         const users = await UserModel.find({})
@@ -76,7 +76,7 @@ userController.get("/", auth, async (req, res) => {
     }
 })
 
-
+//Rota para deletar um usuário especifico de acordo com o email 
 userController.delete("/:email", auth, async (req, res) => {
     const email = req.params.email;
     try {
